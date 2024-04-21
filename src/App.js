@@ -5,15 +5,11 @@ import Cart from "./pages/Cart";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import { createContext, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "./redux/slices/filterSlice";
 
 export const SearchContext = createContext();
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
-  const count = useSelector((state) => state.counter.value);
-  const dispatch = useDispatch();
 
   return (
     <div className="wrapper">
