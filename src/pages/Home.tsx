@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import Skeleton from "../components/PizzaBlock/Skeleton";
@@ -16,7 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { sortList } from "../components/Sort";
 import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice";
 
-const Home = () => {
+const Home: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
@@ -26,12 +26,12 @@ const Home = () => {
   const { categoryId, sort, currentPage, searchValue } =
     useSelector(selectFilter);
 
-  const onChangeCategory = (id) => {
-    dispatch(setCategoryId(id));
+  const onChangeCategory = (index: number) => {
+    dispatch(setCategoryId(index));
   };
 
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page));
   };
 
   const getPizzas = async () => {
@@ -41,6 +41,7 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         category,
         sortBy,
@@ -92,7 +93,7 @@ const Home = () => {
     isSearch.current = false;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-  const pizzas = items.map((pizza) => (
+  const pizzas = items.map((pizza: any) => (
     <Link key={pizza.id} to={`pizza/${pizza.id}`}>
       <PizzaBlock {...pizza} />
     </Link>
@@ -106,7 +107,7 @@ const Home = () => {
       <div className="content__top">
         <Categories
           value={categoryId}
-          onChangeCategory={(id) => onChangeCategory(id)}
+          onChangeCategory={(id: number) => onChangeCategory(id)}
         />
         <Sort />
       </div>
@@ -114,7 +115,7 @@ const Home = () => {
       {status === "error" ? (
         <div className="content__error-info">
           <h2>
-            Произошла ошибка <icon>😕</icon>
+            Произошла ошибка <span>😕</span>
           </h2>
           <p>
             К сожалению, не удалось получить питсы. Попробуйте повторить попытку
@@ -126,7 +127,7 @@ const Home = () => {
           {status === "loading" ? skeletons : pizzas}
         </div>
       )}
-      <Pagination value={currentPage} onChangePage={onChangePage} />
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
 };
