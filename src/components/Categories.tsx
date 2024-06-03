@@ -14,24 +14,24 @@ const categories = [
   "Закрытые",
 ];
 
-const Categories: FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
-  return (
-    <div className="categories">
-      <ul>
-        {categories.map((category, index) => {
-          return (
-            <li
-              key={index}
-              onClick={() => onChangeCategory(index)}
-              className={value === index ? "active" : ""}
-            >
-              {category}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-});
-
-export default Categories;
+export const Categories: FC<CategoriesProps> = memo(
+  ({ value, onChangeCategory }) => {
+    return (
+      <div className="categories">
+        <ul>
+          {categories.map((category, index) => {
+            return (
+              <li
+                key={index}
+                onClick={() => onChangeCategory(index)}
+                className={value === index ? "active" : ""}
+              >
+                {category}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  },
+);

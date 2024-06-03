@@ -1,9 +1,11 @@
 import { FC, useCallback, useEffect, useRef } from "react";
-import Categories from "../components/Categories";
-import Sort from "../components/Sort";
-import Skeleton from "../components/PizzaBlock/Skeleton";
-import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
-import Pagination from "../components/Pagination";
+import {
+  Categories,
+  Sort,
+  Pagination,
+  Skeleton,
+  PizzaBlock,
+} from "../components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../redux/store";
