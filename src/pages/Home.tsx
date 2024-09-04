@@ -128,7 +128,9 @@ const Home: FC = () => {
           {status === "loading" ? skeletons : pizzas}
         </div>
       )}
-      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      {categoryId === 0 && (
+        <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      )}
     </div>
   );
 };
